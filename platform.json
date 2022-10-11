@@ -55,6 +55,13 @@
       "optional": true,
       "owner": "platformio",
       "version": "~2.1000.0"
+    },
+    "tool-lm4flash": {
+      "type": "uplaoder",
+      "optional": true,
+      "owner": "platformio",
+      "version": "~1.103.0"
     }
+    
   }
 }
