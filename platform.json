@@ -42,7 +42,7 @@
       "type": "framework",
       "optional": true,
       "owner": "platformio",
-      "version": "~1.10002.0"
+      "version": "~1.10004.0"
     },
     "framework-libopencm3": {
       "type": "framework",
