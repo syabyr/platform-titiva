@@ -166,23 +166,36 @@ AlwaysBuild(target_size)
 # Target: Upload firmware
 #
 
-openocd_args = [
-    "-d%d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1)
-]
-openocd_args.extend(board.get("debug.tools.ti-icdi.server.arguments", []))
-openocd_args.extend([
-    "-c", "program {$SOURCE} %s verify reset; shutdown;" %
-    board.get("upload.offset_address", "")
-])
-openocd_args = [
-    f.replace("$PACKAGE_DIR",
-              platform.get_package_dir("tool-openocd") or "")
-    for f in openocd_args
-]
-env.Replace(
-    UPLOADER="openocd",
-    UPLOADERFLAGS=openocd_args,
-    UPLOADCMD="$UPLOADER $UPLOADERFLAGS")
+if env.subst("$UPLOAD_PROTOCOL") == "openocd":
+    openocd_args = [
+        "-d%d" % (2 if int(ARGUMENTS.get("PIOVERBOSE", 0)) else 1)
+    ]
+    openocd_args.extend(board.get("debug.tools.ti-icdi.server.arguments", []))
+    openocd_args.extend([
+        "-c", "program {$SOURCE} %s verify reset; shutdown;" %
+        board.get("upload.offset_address", "")
+    ])
+    openocd_args = [
+        f.replace("$PACKAGE_DIR",
+                  platform.get_package_dir("tool-openocd") or "")
+        for f in openocd_args
+    ]
+    env.Replace(
+        UPLOADER="openocd",
+        UPLOADERFLAGS=openocd_args,
+        UPLOADCMD="$UPLOADER $UPLOADERFLAGS")
+
+elif env.subst("$UPLOAD_PROTOCOL") == "lm4flash":
+    lm4flash_args = []
+    lm4flash_args = [
+        f.replace("$PACKAGE_DIR",
+                  platform.get_package_dir("tool-lm4flash") or "")
+        for f in lm4flash_args
+    ]
+    env.Replace(
+        UPLOADER="lm4flash",
+        UPLOADERFLAGS=lm4flash_args,
+        UPLOADCMD='"$UPLOADER" $UPLOADERFLAGS $SOURCES')
 
 target_upload = env.Alias("upload", target_firm,
                           env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE"))
