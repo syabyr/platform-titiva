@@ -28,7 +28,8 @@
   },
   "frameworks": [
     "arduino",
-    "libopencm3"
+    "libopencm3",
+    "nativetiva"
   ],
   "name": "TI LaunchPad (Stellaris) w/ lm4f120 (80MHz)",
   "upload": {
