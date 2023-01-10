@@ -30,6 +30,10 @@
     "libopencm3": {
       "package": "framework-libopencm3",
       "script": "builder/frameworks/libopencm3/libopencm3.py"
+    },
+    "nativetiva": {
+      "package": "framework-nativetiva",
+      "script": "builder/frameworks/native.py"
     }
   },
   "packages": {
@@ -49,6 +53,12 @@
       "optional": true,
       "owner": "platformio",
       "version": "~1.10000.0"
+    },
+    "framework-nativetiva":{
+      "type": "framework",
+      "optional": true,
+      "owner": "platformio",
+      "version":"~1.10000.0"
     },
     "tool-openocd": {
       "type": "uploader",
