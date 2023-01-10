@@ -31,8 +31,8 @@ from SCons.Script import DefaultEnvironment
 env = DefaultEnvironment()
 platform = env.PioPlatform()
 
-FRAMEWORK_DIR = platform.get_package_dir("framework-energiativa")
-FRAMEWORK_VERSION = platform.get_package_version("framework-energiativa")
+FRAMEWORK_DIR = platform.get_package_dir("framework-nativetiva")
+FRAMEWORK_VERSION = platform.get_package_version("framework-nativetiva")
 assert isdir(FRAMEWORK_DIR)
 
 machine_flags = [
@@ -68,10 +68,9 @@ env.Append(
     LIBS=["libdriverlib"],
 
     CPPPATH=[
-        join(FRAMEWORK_DIR, "system"),
-        join(FRAMEWORK_DIR, "system", "inc"),
-        join(FRAMEWORK_DIR, "system", "driverlib"),
-        join(FRAMEWORK_DIR, "cores", env.BoardConfig().get("build.core")),
+        join(FRAMEWORK_DIR, ""),
+        join(FRAMEWORK_DIR, "inc"),
+        join(FRAMEWORK_DIR, "driverlib"),
         join(FRAMEWORK_DIR, "variants", env.BoardConfig().get("build.variant"))
     ],
 
@@ -97,8 +96,8 @@ if not env.BoardConfig().get("build.ldscript", ""):
 libs = []
 
 libs.append(env.BuildLibrary(
-    join("$BUILD_DIR", "FrameworkEnergia"),
-    join(FRAMEWORK_DIR, "cores", env.BoardConfig().get("build.core"))
+    join("$BUILD_DIR", "driverlib"),
+    join(FRAMEWORK_DIR, "driverlib")
 ))
 
 env.Append(LIBS=libs)
