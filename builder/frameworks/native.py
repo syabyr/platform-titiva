@@ -62,10 +62,12 @@ env.Append(
         "-Wl,--unresolved-symbols=report-all",
         "-Wl,--warn-common",
         "-Wl,--warn-section-align",
-        "-fsingle-precision-constant"
+        "-fsingle-precision-constant",
+        "--specs=nano.specs",
+        "--specs=nosys.specs"
     ],
 
-    LIBS=["libdriverlib"],
+    LIBS=["libdriverlib","nosys"],
 
     CPPPATH=[
         join(FRAMEWORK_DIR, ""),
